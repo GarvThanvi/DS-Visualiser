@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doubly Linked List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">DoublyLinkedList</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="../Home/index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html">Theory</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="Code/code.html">Code</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="Simulation/sll.html">Simulation</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="Quiz/quiz.html">Quiz</a>
+              </li>
+
+              
+              
+            </ul>
+            <a class="navbar-brand" href="../LinkedList/index.html">LinkedList</a>
+            <a class="navbar-brand" href="../BinarySearch/index.html">BinarySearch</a>
+            <form class="d-flex" role="search">
+              
+              
+            </form>
+          </div>
+        </div>
+      </nav>
+
+      <div class="newnav">
+        <a href="index.html">InsertionOperations</a>
+        <a href="index1.html">DeletionOperations</a>
+      </div>
+
+      <div class="theory">
+        <span> <span class="bold">What is Doubly Linked List?</span> <br>
+            A doubly linked list (DLL) is a special type of linked list in which each node contains a pointer to the previous node as well as the next node of the linked list.</span> <br>
+
+            <span class="bold">Advantages of Doubly Linked List over the singly linked list:
+                </span>
+                <ul>
+                    <li>A DLL can be traversed in both forward and backward directions. </li>
+                     <li>The delete operation in DLL is more efficient if a pointer to the node to be deleted is given. </li>   
+                        <li>We can quickly insert a new node before a given node. </li>
+                        <li>In a singly linked list, to delete a node, a pointer to the previous node is needed. To get this previous node, sometimes the list is traversed. In DLL, we can get the previous node using the previous pointer.</li> 
+                </ul>
+
+                <span class="bold">Operations on Doubly Linked List:</span> <br>
+                <span class="bold">Insertion at Beginning:</span> <br>
+                <img src="Resources/insertion.png" alt="">
+                <ol type="1">
+                    <li>Firstly, allocate a new node (say new_node).</li>
+                    <li>Now put the required data in the new node.</li>
+                    <li>Make the next of new_node point to the current head of the doubly linked list.</li>
+                    <li> Make the previous of the current head point to new_node.</li>
+                    <li>Lastly, point head to new_node.</li>
+                </ol>
+
+                
+            <span class="bold">Insert Node after a given node:</span> <br>
+            <span>We are given a pointer to a node as prev_node, and the new node is inserted after the given node. This can be done using the following 6 steps:</span> <br>
+            <img src="Resources/insert1.png" alt="">
+            <ol type="1">
+                <li>Firstly, allocate a new node (say new_node).</li>
+                <li>Now insert the data in the new node.</li>
+                <li>Point the next of new_node to the next of prev_node.</li>
+                <li>Point the next of prev_node to new_node.</li>
+                <li>Point the previous of new_node to prev_node.</li>
+                <li>Change the pointer of the new node’s previous pointer to new_node.</li>
+            </ol>
+
+            <span class="bold">Add a Node before a given node</span> <br>
+            <span>Add a node before a given node in a Doubly Linked List: </span> <br>
+            <span>Let the pointer to this given node be next_node. This can be done using the following 6 steps. </span>
+                <ol>
+                    <li>Allocate memory for the new node, let it be called new_node.</li>
+                    <li>Put the data in new_node.</li>
+                    <li>Set the previous pointer of this new_node as the previous node of the next_node.</li>
+                    <li>Set the previous pointer of the next_node as the new_node.</li>
+                    <li>Set the next pointer of this new_node as the next_node.</li>
+                    <li> Now set the previous pointer of new_node.</li>
+            
+                <ul>
+                    <li>If the previous node of the new_node is not NULL, then set the next pointer of this previous node as new_node.</li>
+                    <li>Else, if the prev of new_node is NULL, it will be the new head node.</li>
+                </ul>
+            </ol>
+            <img src="Resources/delete.png" alt="">
+            <span class="bold">Add a node at the end in a Doubly Linked List:</span> <br>
+            <span>The new node is always added after the last node of the given Linked List. This can be done using the following 7 steps:</span>
+            <ol type="1">
+                <li>Create a new node (say new_node).</li>
+                <li> Put the value in the new node.</li>
+                <li>Make the next pointer of new_node as null.</li>
+                <li>If the list is empty, make new_node as the head.</li>
+                <li>Otherwise, travel to the end of the linked list.</li>
+                <li>Now make the next pointer of last node point to new_node.</li>
+                <li> Change the previous pointer of new_node to the last node of the list.</li>
+            </ol>
+      </div>
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>    
+</body>
+</html>

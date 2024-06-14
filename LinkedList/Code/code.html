@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Singly Linked List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="codestyle.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Linked List</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="../index.html">Theory</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="code.html">Code</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="../Simulation/sll.html">Simulation</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="../Quiz/quiz.html">Quiz</a>
+              </li>
+              
+            </ul>
+            <a class="navbar-brand" href="../../DoublyLinkedList/index.html">DoublyLinkedList</a>
+            <a class="navbar-brand" href="../../BinarySearch/index.html">BinarySearch</a>
+            <form class="d-flex" role="search">
+              
+              
+            </form>
+          </div>
+        </div>
+      </nav> 
+
+      
+         <h1>Implementation Of Linked List</h1>
+         <p>
+#include&lt;stdio.h&gt; <br>
+#include&lt;stdlib.h&gt; <br>
+typedef struct node <br>
+{ <br>
+int data; <br>
+struct node *next; <br>
+}node; <br>
+node *create(); <br>
+void insert_beg(node **); <br>
+void insert_end(node **); <br>
+void display(node *); <br>
+void delete_last(node **); <br>
+void delete_first(node **);<br>
+node *create()<br>
+{<br>
+node *temp; <br>
+temp=(node*)malloc(sizeof(node)); <br>
+printf("Enter value");<br>
+scanf("%d",&temp->data);<br>
+temp->next=NULL;<br>
+return temp;<br>
+}<br>
+void insert_beg(node **head)<br>
+{<br>
+node *temp;<br>
+temp=create();<br>
+if(*head==NULL)<br>
+*head=temp;<br>
+else<br>
+{<br>
+temp->next=*head;<br>
+*head=temp;<br>
+}<br>
+printf("\n Insertion Successfull at start");<br>
+}<br>
+void insert_end(node **head)<br>
+{<br>
+node *temp,*ptr;<br>
+temp=create();<br>
+
+if(*head==NULL)<br>
+*head=temp;<br>
+else<br>
+{<br>
+ptr=*head;<br>
+while(ptr->next!=NULL)<br>
+{<br>
+ptr=ptr->next;<br>
+}<br>
+ptr->next=temp;<br>
+}<br>
+printf("\n Insertion Successfull at end");<br>
+}<br>
+void display(node *head)<br>
+{<br>
+node *ptr;<br>
+if(head==NULL)<br>
+printf("Empty list");<br>
+else<br>
+{<br>
+ptr=head;<br>
+printf("Link List");<br>
+while(ptr!=NULL)<br>
+{<br>
+printf("%d->",ptr->data);<br>
+ptr=ptr->next;<br>
+}<br>
+printf("NULL");<br>
+}<br>
+}<br>
+void delete_first(node **head)<br>
+{<br>
+node *curptr,*temp;<br>
+if(*head==NULL)<br>
+printf("\n List Is Empty");<br>
+else<br>
+{<br>
+curptr=temp=*head;<br>
+temp=curptr->next;<br>
+free(curptr);<br>
+*head=temp;<br>
+<br>
+printf("\n\nDelete First Node");<br>
+}<br>
+}<br>
+void delete_last(node **head)<br>
+{<br>
+node *curptr,*preptr;<br>
+if(*head==NULL)<br>
+printf("\n List Is Empty");<br>
+else<br>
+{<br>
+curptr=*head;<br>
+if(curptr->next==NULL)<br>
+{<br>
+free(curptr);<br>
+*head=NULL;<br>
+}<br>
+else<br>
+{<br>
+while(curptr->next!=NULL)<br>
+{<br>
+preptr=curptr;<br>
+curptr=curptr->next;<br>
+}<br>
+free(curptr);<br>
+preptr->next=NULL;<br>
+}<br>
+printf("Delete Last Node");<br>
+<br>}
+}<br>
+
+int main()<br>
+{<br>
+node *start=NULL;<br>
+printf("\tSINGLY LINKED LIST");<br>
+int ch;<br>
+while(1)<br>
+{<br>
+printf("\n Press 1 to Insert begin\n Press 2 to Insert last\n Press 3 to Delete<br>
+first\n Press 4 to Delete last\n Press 5 to Display\n Press 6 to Exit");<br>
+<br>
+printf("Enter your choice=");<br>
+scanf("%d",&ch);<br>
+switch(ch)<br>
+{<br>
+case 1:<br>
+insert_beg(&start);<br>
+break;<br>
+case 2:<br>
+insert_end(&start);<br>
+break;<br>
+case 3:<br>
+delete_first(&start);<br>
+break;<br>
+case 4:<br>
+delete_last(&start);<br>
+break;<br>
+case 5:<br>
+display(start);<br>
+break;<br>
+case 6:<br>
+printf("Thank you");<br>
+exit(0);<br>
+default:<br>
+printf("Wrong Input");<br>
+}<br>
+}<br>
+}<br>
+</p>
+      
+      
+</body>
+</html>

@@ -1,0 +1,28 @@
+.theory{
+    margin-left: 100px;
+    margin-top: 50px;
+    margin-right: 100px;
+}
+span{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: x-large;
+}
+.theory>ul{
+    font-size: larger;
+}
+ol{
+    font-size: larger;
+}
+
+
+.bold{
+    font-size: xx-large;
+    font-weight: bold;
+}
+img{
+    float: right;
+    height: 250px;
+}
+
+

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doubly Linked List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="code.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">DoublyLinkedList</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="../index.html">Theory</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="code.html">Code</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="../Simulation/sll.html">Simulation</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="../Quiz/quiz.html">Quiz</a>
+              </li>
+              
+            </ul>
+            <a class="navbar-brand" href="../../LinkedList/index.html">LinkedList</a>
+            <a class="navbar-brand" href="../../BinarySearch/index.html">BinarySearch</a>
+            <form class="d-flex" role="search">
+              
+              
+            </form>
+          </div>
+        </div>
+      </nav>
+
+      <h1>Implementation of Doubly Linked List:</h1>
+      <p>
+        #include&lt;stdio.h&gt; <br>
+        #include&lt;stdlib.h&gt; <br>
+          void insertAtBeginning(int); <br>
+          void insertAtEnd(int); <br>
+          void deleteBeginning(); <br>
+          void deleteEnd(); <br>
+          void display(); <br>
+          struct Node <br>
+          { <br>
+          int data; <br>
+          struct Node *previous, *next; <br>
+          }*head=NULL; <br>
+          void main() <br>
+          { <br>
+          int choice1,choice2,value,location; <br>
+          while(1) <br>
+          { <br>
+          printf("\n**********MENU**********\n"); <br>
+          printf("1.INSERT\n2.DELETE\n3.DISPLAY\n4.EXIT\nEnter your choice:"); <br>
+          scanf("%d",&choice1); <br>
+          switch(choice1) <br>
+          { <br>
+          case 1:printf("Enter the value to be inserted:"); <br>
+          scanf("%d",&value); <br>
+          while(1) <br>
+          { <br>
+          printf("\nSelect from the following Inserting options\n"); <br>
+          printf("1.At Beginning\n2.At end\n3.Cancel\nEnter your choice:"); <br>
+          scanf("%d",&choice2); <br>
+          switch(choice2) <br>
+          { <br>
+          case 1:insertAtBeginning(value); <br>
+          break; <br>
+          case 2:insertAtEnd(value); <br>
+          break; <br>
+          case 3:goto EndSwitch; <br>
+          default:printf("\nPlease select correct Inserting option!!!\n"); <br>
+          }<br>
+          }<br> 
+          case 2:while(1)<br>
+          {<br>
+          printf("\nSelect from the following Deleting options\n");<br>
+          printf("\n1.At beginning\n2.At end\n3.Cancel\nEnter your choice:\n");<br>
+          scanf("%d",&choice2);<br>
+          switch(choice2)<br>
+          {<br>
+          case 1:deleteBeginning();<br>
+          break;<br>
+          <br>
+          case 2:deleteEnd();<br>
+          break;<br>
+          case 3:goto EndSwitch;<br>
+          default:printf("\nPlease select correct deleting options\n");<br>
+          }<br>
+          }<br>
+          EndSwitch:break;<br>
+          case 3:display();<br>
+          break;<br>
+          case 4:exit(0);<br>
+          default:printf("\nplease select correct option!!!\n"); <br>
+          }<br>
+          }<br>
+          }<br>
+          void insertAtBeginning(int value)<br>
+          {<br>
+          struct Node *newNode;<br>
+          newNode=(struct Node*)malloc(sizeof(struct Node));<br>
+          newNode->data=value;<br>
+          newNode->previous=NULL;<br>
+          if(head==NULL)<br>
+          {<br>
+          newNode->next=NULL;<br>
+          head=newNode;<br>
+          }<br>
+          else<br>
+          {<br>
+          newNode->next=head;<br>
+          head=newNode;<br>
+          }<br>
+          printf("\nInsertion success\n");<br>
+          }<br>
+          void insertAtEnd(int value) <br>
+          {<br>
+          struct Node *newNode; <br>
+          newNode=(struct Node*)malloc(sizeof(struct Node));<br>
+          newNode->data=value;<br>
+          newNode->next=NULL;<br>
+          if(head==NULL)<br>
+          {<br>
+          newNode->previous=NULL;<br>
+          head=newNode;<br>
+          }<br>
+          else<br>
+          {<br>
+          struct Node *temp=head;<br>
+          while(temp->next!=NULL)<br>
+          temp=temp->next;<br>
+          temp->next=newNode;<br>
+          newNode->previous=temp;<br>
+          <br>
+          }<br>
+          printf("\nInsertion success!!");<br>
+          }<br>
+          void deleteBeginning()<br>
+          {<br>
+          if (head == NULL)<br>
+          printf("List is empty! Deletion not possible!\n");<br>
+          else<br>
+          {<br>
+          struct Node *temp = head;<br>
+          if (temp->previous == temp->next)<br>
+          {<br>
+          head = NULL;<br>
+          free(temp);<br>
+          }<br>
+          else<br>
+          {<br>
+          head = temp->next;<br>
+          head->previous = NULL;<br>
+          free(temp);<br>
+          }<br>
+          printf("Deletion successful!\n");<br>
+          }<br>
+          }<br>
+          void deleteEnd() <br>
+          { <br>
+          if (head == NULL) <br>
+          printf("List is empty! Deletion not possible!\n"); <br>
+          else <br>
+          { <br>
+          struct Node *temp = head; <br>
+          if (temp->previous == temp->next) <br>
+          { <br> 
+          head = NULL; <br> 
+          free(temp); <br>
+          } <br>
+          else <br>
+          { <br>
+          while (temp->next != NULL) <br>
+          temp = temp->next; <br>
+          temp->previous->next = NULL; <br>
+          free(temp); <br>
+          } <br>
+          printf("Deletion successful!\n"); <br>
+          } <br>
+          } <br>
+          void display() <br>
+          { <br>
+          if (head == NULL) <br>
+          printf("List is empty!\n"); <br>
+          <br>
+          else<br>
+          {<br>
+          struct Node *temp = head;<br>
+          printf("List elements are: NULL<---");<br>
+          while (temp != NULL)<br>
+          {<br>
+          printf("%d&lt;===>", temp->data);<br>
+          temp = temp->next; <br>
+          }<br>
+          printf("NULL\n");<br>
+          }<br>
+          }<br>
+      </p>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>    
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Linked List Simulation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #E4E4D0;
+        }
+
+        #linked-list {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .node {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px;
+        }
+
+        .data-box {
+            width: 60px;
+            height: 60px;
+            background-color: #3498db;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .arrow {
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            margin: 5px 0;
+        }
+
+        .start {
+            width: 60px;
+            height: 60px;
+            background-color: #2ecc71; /* Green color for the start box */
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5px;
+            border-radius: 8px; /* Adding border radius for a rounded appearance */
+        }
+
+        input {
+            height: 40px;
+        }
+
+        button {
+            height: 40px;
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: blue;
+        }
+
+        label {
+            font-size: larger;
+            margin-right: 10px;
+        }
+
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300&family=Phudu:wght@500&family=Prompt:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Linked List</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../index.html">Theory</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../Code/code.html">Code</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="sll.html">Simulation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../Quiz/quiz.html">Quiz</a>
+                    </li>
+
+                </ul>
+                <a class="navbar-brand" href="../../DoublyLinkedList/index.html">DoublyLinkedList</a>
+            <a class="navbar-brand" href="../../BinarySearch/index.html">BinarySearch</a>
+                <form class="d-flex" role="search">
+
+
+                </form>
+            </div>
+        </div>
+    </nav>
+    <h1>Linked List Simulation</h1>
+    <div>
+        <label for="value">Enter a value:</label>
+        <input type="text" id="value" placeholder="Node Value">
+        <button onclick="insertAtBeginning()">Insert at Beginning</button>
+        <button onclick="insertAtEnd()">Insert at End</button>
+        <button onclick="insertInBetween()">Insert in Between</button>
+        <button onclick="deleteFromEnd()">Delete from End</button>
+        <button onclick="deleteFromBetween()">Delete from Between</button>
+        <button onclick="deleteFromStart()">Delete from Start</button>
+    </div>
+    <div id="linked-list"></div>
+
+    <script>
+        class Node {
+            constructor(data) {
+                this.data = data;
+                this.next = null;
+            }
+        }
+
+        class LinkedList {
+            constructor() {
+                this.start = null;
+                this.nodeCounter = 1;
+            }
+
+            insertAtBeginning(data) {
+                const newNode = new Node(data);
+                newNode.next = this.start;
+                this.start = newNode;
+                this.display();
+            }
+
+            insertAtEnd(data) {
+                const newNode = new Node(data);
+                if (!this.start) {
+                    this.start = newNode;
+                } else {
+                    let current = this.start;
+                    while (current.next) {
+                        current = current.next;
+                    }
+                    current.next = newNode;
+                }
+                this.display();
+            }
+
+            insertInBetween(data, position) {
+                const newNode = new Node(data);
+                let current = this.start;
+                let count = 1;
+                while (count < position - 1 && current) {
+                    current = current.next;
+                    count++;
+                }
+                if (!current) {
+                    alert("Position not found!");
+                    return;
+                }
+                newNode.next = current.next;
+                current.next = newNode;
+                this.display();
+            }
+
+            deleteFromEnd() {
+                if (!this.start) {
+                    alert("List is empty!");
+                    return;
+                }
+                if (!this.start.next) {
+                    this.start = null;
+                } else {
+                    let current = this.start;
+                    while (current.next.next) {
+                        current = current.next;
+                    }
+                    current.next = null;
+                }
+                this.display();
+            }
+
+            deleteFromBetween(position) {
+                if (!this.start) {
+                    alert("List is empty!");
+                    return;
+                }
+                if (position === 1) {
+                    this.start = this.start.next;
+                } else {
+                    let current = this.start;
+                    let count = 1;
+                    while (count < position - 1 && current) {
+                        current = current.next;
+                        count++;
+                    }
+                    if (!current || !current.next) {
+                        alert("Position not found!");
+                        return;
+                    }
+                    current.next = current.next.next;
+                }
+                this.display();
+            }
+
+            deleteFromStart() {
+                if (!this.start) {
+                    alert("List is empty!");
+                    return;
+                }
+                this.start = this.start.next;
+                this.display();
+            }
+
+            display() {
+                const linkedListDiv = document.getElementById("linked-list");
+                linkedListDiv.innerHTML = "";
+
+                // Add the start box
+                if (this.start) {
+                    const startDiv = document.createElement("div");
+                    startDiv.className = "node";
+                    startDiv.innerHTML = `<div class="start">Start</div>`;
+                    linkedListDiv.appendChild(startDiv);
+                }
+
+                let current = this.start;
+                while (current) {
+                    const nodeDiv = document.createElement("div");
+                    nodeDiv.className = "node";
+
+                    const dataBox1 = document.createElement("div");
+                    dataBox1.className = "data-box";
+                    dataBox1.textContent = current.data;
+
+                    // Create an arrow for the next node
+                    const arrow = document.createElement("div");
+                    arrow.className = "arrow";
+
+                    // Create a second box for the next node identifier
+                    const dataBox2 = document.createElement("div");
+                    dataBox2.className = "data-box";
+                    if (current.next) {
+                        dataBox2.textContent = `Next: Node ${this.nodeCounter + 1}`;
+                    } else {
+                        dataBox2.textContent = "Next: NULL";
+                    }
+
+                    nodeDiv.appendChild(dataBox1);
+                    nodeDiv.appendChild(arrow);
+                    nodeDiv.appendChild(dataBox2);
+
+                    linkedListDiv.appendChild(nodeDiv);
+                    current = current.next;
+                    this.nodeCounter++;
+                }
+                this.nodeCounter = 1; // Reset the counter after displaying all nodes
+            }
+        }
+
+        const linkedList = new LinkedList();
+
+        function insertAtBeginning() {
+            const value = document.getElementById("value").value;
+            linkedList.insertAtBeginning(value);
+        }
+
+        function insertAtEnd() {
+            const value = document.getElementById("value").value;
+            linkedList.insertAtEnd(value);
+        }
+
+        function insertInBetween() {
+            const value = document.getElementById("value").value;
+            const position = parseInt(prompt("Enter position:"));
+            linkedList.insertInBetween(value, position);
+        }
+
+        function deleteFromEnd() {
+            linkedList.deleteFromEnd();
+        }
+
+        function deleteFromBetween() {
+            const position = parseInt(prompt("Enter position:"));
+            linkedList.deleteFromBetween(position);
+        }
+
+        function deleteFromStart() {
+            linkedList.deleteFromStart();
+        }
+    </script>
+</body>
+</html>
